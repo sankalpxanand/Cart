@@ -5,14 +5,32 @@ class CartItem extends React.Component{
         super(); //super constructor
         this.state = {
             title: 'Mobile Phone',
-            price: '999',
-            qty: '1',
+            price: 999,
+            qty: 1,
             img: ''
         }
         // this.increaseQty = this.increaseQty.bind(this);
     }
     increaseQty = () => { //arrow function automatically binds 'this' and the instance of the 'CartItem' class
-        console.log('this', this.state);
+        //this.state.qty +=1;
+        // console.log('this', this.state);
+        //setState form 1
+        // this.setState({
+        //     qty: this.state.qty + 1
+        // });
+        //setState form 2 - if prevState is required
+        this.setState((prevState) => {
+            return{
+                qty: prevState.qty+1
+            }
+        });
+    }
+    decreaseQty = () => {
+        this.setState((prevState) => {
+            return{
+                qty: prevState.qty-1
+            }
+        });
     }
     render () {
         const{title, price, qty} = this.state; // Object Distructing
@@ -37,6 +55,7 @@ class CartItem extends React.Component{
                         alt="decreasing" 
                         className="action-icons" 
                         src="https://cdn-icons-png.flaticon.com/128/992/992683.png"
+                        onClick={this.decreaseQty}
                     />
                     <img 
                         alt="delete" 
