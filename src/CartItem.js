@@ -17,13 +17,17 @@ class CartItem extends React.Component{
         //setState form 1
         // this.setState({
         //     qty: this.state.qty + 1
-        // });
+        // }, () => {}
+        // );
         //setState form 2 - if prevState is required
         this.setState((prevState) => {
             return{
                 qty: prevState.qty+1
             }
+        }, () => {
+            console.log('this.state', this.state);
         });
+        
     }
     decreaseQty = () => {
         this.setState((prevState) => {
@@ -34,6 +38,8 @@ class CartItem extends React.Component{
             return{
                 qty: prevState.qty-1
             }
+        }, () => {
+            console.log('this.state', this.state);
         });
     }
     render () {
