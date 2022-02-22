@@ -27,6 +27,10 @@ class CartItem extends React.Component{
     }
     decreaseQty = () => {
         this.setState((prevState) => {
+            const{qty} = this.state; // Object Distructing
+            if(qty === 0){
+                return;
+            }
             return{
                 qty: prevState.qty-1
             }
