@@ -11,21 +11,21 @@ class App extends React.Component {
                 title: 'Watch',
                 price: 99,
                 qty: 1,
-                img: '',
+                img: 'https://images.casiocdn.com/fit-in/368x500/casio-v2/resource/images/products/watches/hd/GGB100-1A9_hd.png',
                 id: 1
             },
             {
                 title: 'Mobile Phone',
                 price: 999,
                 qty: 1,
-                img: '',
+                img: 'https://images.samsung.com/is/image/samsung/p6pim/in/sm-m127gzbhins/gallery/in-galaxy-m-sm-m127gzbhins-sm-m---gzbgins-405435076?$684_547_PNG$',
                 id: 2
             },
             {
                 title: 'Laptop',
                 price: 9999,
                 qty: 1,
-                img: '',
+                img: 'https://media.wired.com/photos/5fb2cc575c9914713ead03de/2:3/w_1200,h_1800,c_limit/Gear-Apple-MacBook-Air-top-down-SOURCE-Apple.jpg',
                 id: 3
             }
         ]
@@ -76,6 +76,16 @@ class App extends React.Component {
     })
     return count;
   }
+  getCartTotal = () => {
+    const {products} = this.state;
+
+    let cartTotal = 0;
+
+    products.forEach((product) => { //used forEach instead of map
+      cartTotal = cartTotal + product.qty * product.price;
+    })
+    return cartTotal;
+  }
   render() {
     const {products} = this.state;
     return (
@@ -87,6 +97,7 @@ class App extends React.Component {
           onDecreaseQunatity = {this.handleDecreaseQuantity}
           onDeleteProduct = {this.handleDeleteProduct}
         />
+        <div style={{fontSize: 20, padding:10}}>TOTAL: {this.getCartTotal()}</div>
       </div>
     );
   }
