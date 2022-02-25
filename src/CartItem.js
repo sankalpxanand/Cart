@@ -1,49 +1,9 @@
 import React from 'react';
 
 class CartItem extends React.Component{
-    constructor () {
-        super(); //super constructor
-        this.state = {
-            title: 'Mobile Phone',
-            price: 999,
-            qty: 1,
-            img: ''
-        }
-        // this.increaseQty = this.increaseQty.bind(this);
-    }
-    increaseQty = () => { //arrow function automatically binds 'this' and the instance of the 'CartItem' class
-        //this.state.qty +=1;
-        // console.log('this', this.state);
-        //setState form 1
-        // this.setState({
-        //     qty: this.state.qty + 1
-        // }, () => {}
-        // );
-        //setState form 2 - if prevState is required
-        this.setState((prevState) => {
-            return{
-                qty: prevState.qty+1
-            }
-        }, () => {
-            console.log('this.state', this.state);
-        });
-        
-    }
-    decreaseQty = () => {
-        this.setState((prevState) => {
-            const{qty} = this.state; // Object Distructing
-            if(qty === 0){
-                return;
-            }
-            return{
-                qty: prevState.qty-1
-            }
-        }, () => {
-            console.log('this.state', this.state);
-        });
-    }
     render () {
-        const{title, price, qty} = this.state; // Object Distructing
+        const{title, price, qty} = this.props.product; // Object Distructing
+        console.log("this.props", this.props);
         return (
             <div className="cart-item">
                 <div className="left-block">
@@ -59,7 +19,7 @@ class CartItem extends React.Component{
                         alt="increasing" 
                         className="action-icons" 
                         src="https://cdn-icons-png.flaticon.com/128/992/992651.png"
-                        onClick={this.increaseQty}
+                        onClick={() => this.props.onIncreaseQunatity(this.props.product)}
                     />
                     <img 
                         alt="decreasing" 
