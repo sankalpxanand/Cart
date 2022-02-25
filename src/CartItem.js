@@ -2,8 +2,14 @@ import React from 'react';
 
 class CartItem extends React.Component{
     render () {
+        console.log("this.props.product", this.props.product);
         const{title, price, qty} = this.props.product; // Object Distructing
-        console.log("this.props", this.props);
+        const{
+            product, 
+            onIncreaseQunatity, 
+            onDecreaseQunatity, 
+            onDeleteProduct
+        } = this.props;
         return (
             <div className="cart-item">
                 <div className="left-block">
@@ -19,18 +25,19 @@ class CartItem extends React.Component{
                         alt="increasing" 
                         className="action-icons" 
                         src="https://cdn-icons-png.flaticon.com/128/992/992651.png"
-                        onClick={() => this.props.onIncreaseQunatity(this.props.product)}
+                        onClick={() => onIncreaseQunatity(product)}
                     />
                     <img 
                         alt="decreasing" 
                         className="action-icons" 
                         src="https://cdn-icons-png.flaticon.com/128/992/992683.png"
-                        onClick={this.decreaseQty}
+                        onClick={() => onDecreaseQunatity(product)}
                     />
                     <img 
                         alt="delete" 
                         className="action-icons" 
                         src="https://cdn-icons.flaticon.com/png/128/484/premium/484662.png?token=exp=1645429894~hmac=fa4b1df755d3e74dfe57cfb9f6832605"
+                        onClick={() => onDeleteProduct(product.id)}
                     />
                     </div>
                 </div>
@@ -38,7 +45,6 @@ class CartItem extends React.Component{
         );
     }
 }
-
 const styles = {
     image: {
         height: 110,
@@ -47,5 +53,4 @@ const styles = {
         background: '#ccc'
     }
 }
-
 export default CartItem;
